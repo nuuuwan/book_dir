@@ -1,7 +1,8 @@
-from functools import cached_property
-from utils import Log
 import os
+from functools import cached_property
+
 from docx import Document
+from utils import Log
 
 log = Log('BookDir')
 
@@ -37,7 +38,7 @@ class BookDir:
             n_words = stats['n_words']
             file_name_only = file_name.split('.')[0]
             i_doc += 1
-            log.debug(f'{i_doc})\t{file_name_only}\t{n_words:,}')
+            log.debug(f'{i_doc:02}) {file_name_only:<20} {n_words:>10,}')
 
         return stats_idx
 
@@ -51,8 +52,9 @@ class BookDir:
             aggregate_stats['n_chars'] += stats['n_chars']
 
         n_words = aggregate_stats['n_words']
-        log.debug(f'(TOTAL)\t{n_words:,}')
+        log.info(f'n_words={n_words:,}')
         return aggregate_stats
 
     def analyze(self):
         self.aggregate_stats
+        os.startfile(self.dir_path)
